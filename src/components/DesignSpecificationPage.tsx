@@ -68,61 +68,59 @@ const DesignSpecificationPage = () => {
         .from('theme_settings')
         .select('*')
         .eq('is_active', true)
-        .single();
+        .maybeSingle();
 
       if (error) {
-        if (error.code === 'PGRST116') {
-          // アクティブなテーマが見つからない場合はデフォルトテーマを使用
-          setThemeSettings({
-            id: 'default',
-            theme_name: 'デフォルトテーマ',
-            colors: {
-              primary: '#8b5cf6',
-              primaryHover: '#7c3aed',
-              primaryLight: '#a78bfa',
-              primaryDark: '#6d28d9',
-              secondary: '#ec4899',
-              secondaryHover: '#db2777',
-              secondaryLight: '#f472b6',
-              secondaryDark: '#be185d',
-              bgPrimary: '#ffffff',
-              bgSecondary: '#f8fafc',
-              bgAccent: '#f1f5f9',
-              bgDark: '#1e293b',
-              textPrimary: '#1f2937',
-              textSecondary: '#6b7280',
-              textAccent: '#8b5cf6',
-              textLight: '#9ca3af',
-              success: '#10b981',
-              warning: '#f59e0b',
-              error: '#ef4444',
-              info: '#3b82f6'
-            },
-            typography: {
-              fontSize: 'base',
-              fontFamily: 'Noto Sans JP',
-              fontWeight: 'normal',
-              lineHeight: 'relaxed',
-              letterSpacing: 'normal'
-            },
-            layout: {
-              shadows: 'normal',
-              spacing: 'normal',
-              borderRadius: 'normal',
-              containerWidth: 'standard'
-            },
-            animations: {
-              easing: 'ease-out',
-              duration: siteSettings?.animation_duration || 560,
-              hoverEffects: true,
-              reducedMotion: false
-            },
-            is_active: true
-          });
-        } else {
-          console.error('テーマ設定取得エラー:', error);
-          setError(`テーマ設定の取得に失敗しました: ${error.message}`);
-        }
+        console.error('テーマ設定取得エラー:', error);
+        setError(`テーマ設定の取得に失敗しました: ${error.message}`);
+      } else if (!data) {
+        // アクティブなテーマが見つからない場合はデフォルトテーマを使用
+        setThemeSettings({
+          id: 'default',
+          theme_name: 'デフォルトテーマ',
+          colors: {
+            primary: '#8b5cf6',
+            primaryHover: '#7c3aed',
+            primaryLight: '#a78bfa',
+            primaryDark: '#6d28d9',
+            secondary: '#ec4899',
+            secondaryHover: '#db2777',
+            secondaryLight: '#f472b6',
+            secondaryDark: '#be185d',
+            bgPrimary: '#ffffff',
+            bgSecondary: '#f8fafc',
+            bgAccent: '#f1f5f9',
+            bgDark: '#1e293b',
+            textPrimary: '#1f2937',
+            textSecondary: '#6b7280',
+            textAccent: '#8b5cf6',
+            textLight: '#9ca3af',
+            success: '#10b981',
+            warning: '#f59e0b',
+            error: '#ef4444',
+            info: '#3b82f6'
+          },
+          typography: {
+            fontSize: 'base',
+            fontFamily: 'Noto Sans JP',
+            fontWeight: 'normal',
+            lineHeight: 'relaxed',
+            letterSpacing: 'normal'
+          },
+          layout: {
+            shadows: 'normal',
+            spacing: 'normal',
+            borderRadius: 'normal',
+            containerWidth: 'standard'
+          },
+          animations: {
+            easing: 'ease-out',
+            duration: siteSettings?.animation_duration || 560,
+            hoverEffects: true,
+            reducedMotion: false
+          },
+          is_active: true
+        });
       } else {
         setThemeSettings(data);
       }

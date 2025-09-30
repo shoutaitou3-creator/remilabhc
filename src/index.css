@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* フォント設定 */
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* スムーズスクロールとアンカーリンクのオフセット調整 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 固定ヘッダーがある場合のアンカーリンク調整 */
+#entry {
+  scroll-margin-top: 100px;
+}
+
+/* その他のアンカーリンクも同様に調整 */
+#news,
+#contest-overview,
+#work-examples,
+#judges,
+#how-to-enter,
+#prizes,
+#sponsors,
+#faq {
+  scroll-margin-top: 100px;
+}
+
+/* ハンバーガーメニュー用のスタイル */
+@media (max-width: 1023px) {
+  /* モバイル・タブレットでのメニュー表示調整 */
+  .admin-mobile-menu {
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+  }
+  
+  /* スクロールバーのスタイリング */
+  .admin-mobile-menu::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .admin-mobile-menu::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+  
+  .admin-mobile-menu::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 2px;
+  }
+  
+  .admin-mobile-menu::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+}
+
+/* モバイル最適化のためのユーティリティクラス */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* テキストシャドウ用のカスタムクラス */
+.text-shadow-custom {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.text-shadow-strong {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* 16:9縦長アスペクト比のカスタムクラス */
+.aspect-w-9 {
+  position: relative;
+  width: 100%;
+}
+
+.aspect-h-16 {
+  padding-bottom: 177.78%; /* 16/9 * 100% */
+}
+
+.aspect-w-16 {
+  position: relative;
+  width: 100%;
+}
+
+.aspect-h-9 {
+  padding-bottom: 56.25%; /* 9/16 * 100% */
+}
+
+/* 16:9 横長アスペクト比のカスタムクラス */
+.aspect-w-16 {
+  position: relative;
+  width: 100%;
+}
+
+.aspect-h-9 {
+  padding-bottom: 56.25%; /* 9/16 * 100% */
+}
+
+/* タッチデバイス用の最適化 */
+@media (max-width: 768px) {
+  /* タッチターゲットサイズの確保 */
+  button, 
+  input, 
+  select, 
+  textarea {
+    min-height: 44px;
+  }
+  
+  /* フォントサイズの最適化 */
+  input, 
+  select, 
+  textarea {
+    font-size: 16px; /* iOS Safariでのズーム防止 */
+  }
+  
+  /* スクロール性能の向上 */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* フォーカス時のアウトライン調整 */
+.admin-menu-button:focus {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+}

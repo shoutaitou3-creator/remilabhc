@@ -23,6 +23,7 @@ import SharedNewsDemo from './components/SharedNewsDemo';
 import SharedSponsorsDemo from './components/SharedSponsorsDemo';
 import DownloadPage from './components/DownloadPage';
 import RemilaApplicationPage from './components/RemilaApplicationPage';
+import DesignSpecificationPage from './components/DesignSpecificationPage';
 
 const AppContent = () => {
   const [showAdminLogin, setShowAdminLogin] = useState(false);
@@ -80,6 +81,12 @@ const AppContent = () => {
   if (isApplicationPage) {
     console.log('申し込みページを表示');
     return <RemilaApplicationPage />;
+  }
+
+  // デザイン仕様ページの表示
+  if (isDesignSpecPage) {
+    console.log('デザイン仕様ページを表示');
+    return <DesignSpecificationPage />;
   }
 
   // 認証状態の読み込み中はローディング表示

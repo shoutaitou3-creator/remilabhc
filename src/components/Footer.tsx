@@ -104,6 +104,7 @@ const Footer: React.FC<FooterProps> = ({ onAdminClick, siteSettings }) => {
               <li><a href="#sponsors" className="text-gray-400 hover:text-white transition-colors">協賛企業</a></li>
               <li><a href="#faq" className="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
               <li><a href="#entry" className="text-gray-400 hover:text-white transition-colors">エントリー</a></li>
+              <li><a href="/design-spec" className="text-gray-400 hover:text-white transition-colors">デザイン仕様</a></li>
               <li>
                 <a 
                   href={`mailto:${siteSettings?.contact_email || 'info@remilabhc.com'}`}

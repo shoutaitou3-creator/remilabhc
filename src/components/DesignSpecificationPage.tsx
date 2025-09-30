@@ -1,18 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Palette, 
-  Type, 
-  Layout, 
-  Zap, 
-  Monitor, 
-  Smartphone, 
-  Tablet,
-  Eye,
-  Code,
-  Download,
-  Copy,
-  CheckCircle
-} from 'lucide-react';
+import { Palette, Type, LayoutGrid as Layout, Zap, Monitor, Smartphone, Tablet, Eye, Code, Download, Copy, CheckCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useSiteSettings } from '../hooks/useSiteSettings';
 

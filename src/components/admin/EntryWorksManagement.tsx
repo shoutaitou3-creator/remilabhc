@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus } from 'lucide-react';
+import { Plus, ExternalLink } from 'lucide-react';
 import { uploadImage, deleteImage, extractPathFromUrl } from '../../lib/supabase';
 import { useEntryWorksData, EntryWork } from '../../hooks/useEntryWorksData';
 import EntryWorkCard from './entryWorks/EntryWorkCard';
@@ -347,13 +347,24 @@ const EntryWorksManagement: React.FC = () => {
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">エントリー作品管理</h2>
             <p className="text-sm sm:text-base text-gray-600">コンテストエントリー作品の管理・ノミネート設定</p>
           </div>
-          <button
-            onClick={handleAddEntryWork}
-            className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg font-medium text-sm min-h-[44px]"
-          >
-            <Plus className="w-5 h-5" />
-            <span>新しいエントリー作品を追加</span>
-          </button>
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <a
+              href="/entry-works"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg font-medium text-sm min-h-[44px]"
+            >
+              <ExternalLink className="w-5 h-5" />
+              <span>エントリー作品ページを表示</span>
+            </a>
+            <button
+              onClick={handleAddEntryWork}
+              className="flex items-center justify-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg font-medium text-sm min-h-[44px]"
+            >
+              <Plus className="w-5 h-5" />
+              <span>新しいエントリー作品を追加</span>
+            </button>
+          </div>
         </div>
       </div>
 

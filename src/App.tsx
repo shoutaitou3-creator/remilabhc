@@ -24,6 +24,7 @@ import SharedSponsorsDemo from './components/SharedSponsorsDemo';
 import DownloadPage from './components/DownloadPage';
 import RemilaApplicationPage from './components/RemilaApplicationPage';
 import DesignSpecificationPage from './components/DesignSpecificationPage';
+import EntryWorksPage from './components/EntryWorksPage';
 
 const AppContent = () => {
   const [showAdminLogin, setShowAdminLogin] = useState(false);
@@ -71,7 +72,8 @@ const AppContent = () => {
   const isDownloadPage = window.location.pathname === '/download';
   const isApplicationPage = window.location.pathname === '/application';
   const isDesignSpecPage = window.location.pathname === '/design-spec';
-  
+  const isEntryWorksPage = window.location.pathname === '/entry-works';
+
   // Supabase設定エラーの場合でも、ダウンロードページは表示する
   if (isDownloadPage) {
     console.log('ダウンロードページを表示');
@@ -88,6 +90,12 @@ const AppContent = () => {
   if (isDesignSpecPage) {
     console.log('デザイン仕様ページを表示');
     return <DesignSpecificationPage />;
+  }
+
+  // エントリー作品ページの表示
+  if (isEntryWorksPage) {
+    console.log('エントリー作品ページを表示');
+    return <EntryWorksPage />;
   }
 
   // 認証状態の読み込み中はローディング表示

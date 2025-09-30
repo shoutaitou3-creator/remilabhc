@@ -70,6 +70,7 @@ const AppContent = () => {
   // 資料ダウンロードページの表示判定
   const isDownloadPage = window.location.pathname === '/download';
   const isApplicationPage = window.location.pathname === '/application';
+  const isDesignSpecPage = window.location.pathname === '/design-spec';
   
   // Supabase設定エラーの場合でも、ダウンロードページは表示する
   if (isDownloadPage) {

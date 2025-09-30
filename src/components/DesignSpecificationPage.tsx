@@ -197,6 +197,146 @@ ${cssVars}
     }
   };
 
+  // 全文テキストを生成
+  const generateFullText = () => {
+    if (!themeSettings) return '';
+
+    const colorList = Object.entries(themeSettings.colors)
+      .map(([key, value]) => `  - ${key}: ${value}`)
+      .join('\n');
+
+    return `# デザイン仕様書
+REMILA BHC 2026 サイトのデザインシステム仕様
+
+## 概要
+
+### 基本方針
+- モダンで洗練されたデザイン
+- レスポンシブ対応（モバイルファースト）
+- アクセシビリティを重視
+- 一貫性のあるユーザー体験
+- 高いパフォーマンス
+
+### 技術スタック
+- React + TypeScript
+- Tailwind CSS
+- Lucide React (アイコン)
+- Supabase (データベース)
+- Vite (ビルドツール)
+
+### 現在のテーマ設定
+テーマ名: ${themeSettings.theme_name}
+- カラー定義: ${Object.keys(themeSettings.colors).length}種類
+- フォントファミリー: ${themeSettings.typography.fontFamily}
+- アニメーション時間: ${themeSettings.animations.duration}ms
+- スペーシング: ${themeSettings.layout.spacing}
+
+## カラーパレット
+
+### プライマリカラー
+- Primary: ${themeSettings.colors.primary}
+- Primary Hover: ${themeSettings.colors.primaryHover}
+- Primary Light: ${themeSettings.colors.primaryLight}
+- Primary Dark: ${themeSettings.colors.primaryDark}
+
+### セカンダリカラー
+- Secondary: ${themeSettings.colors.secondary}
+- Secondary Hover: ${themeSettings.colors.secondaryHover}
+- Secondary Light: ${themeSettings.colors.secondaryLight}
+- Secondary Dark: ${themeSettings.colors.secondaryDark}
+
+### 背景色
+- Background Primary: ${themeSettings.colors.bgPrimary}
+- Background Secondary: ${themeSettings.colors.bgSecondary}
+- Background Accent: ${themeSettings.colors.bgAccent}
+- Background Dark: ${themeSettings.colors.bgDark}
+
+### テキストカラー
+- Text Primary: ${themeSettings.colors.textPrimary}
+- Text Secondary: ${themeSettings.colors.textSecondary}
+- Text Accent: ${themeSettings.colors.textAccent}
+- Text Light: ${themeSettings.colors.textLight}
+
+### ステータスカラー
+- Success: ${themeSettings.colors.success}
+- Warning: ${themeSettings.colors.warning}
+- Error: ${themeSettings.colors.error}
+- Info: ${themeSettings.colors.info}
+
+## タイポグラフィ
+
+### フォント設定
+- フォントファミリー: ${themeSettings.typography.fontFamily}
+- ベースサイズ: ${themeSettings.typography.fontSize}
+- フォントウェイト: ${themeSettings.typography.fontWeight}
+- 行間: ${themeSettings.typography.lineHeight}
+- 字間: ${themeSettings.typography.letterSpacing}
+
+### フォントサイズ一覧
+- H1: 1.875rem (30px), font-weight: 700
+- H2: 1.5rem (24px), font-weight: 700
+- H3: 1.25rem (20px), font-weight: 700
+- Body: 1rem (16px), font-weight: 400
+- Small: 0.875rem (14px), font-weight: 400
+
+## レイアウト仕様
+
+### スペーシング
+システム: ${themeSettings.layout.spacing}
+8px基準のスペーシングシステム
+- 4px, 8px, 12px, 16px, 24px, 32px, 48px, 64px
+
+### ボーダー半径
+システム: ${themeSettings.layout.borderRadius}
+- Small: 4px
+- Default: 8px
+- Large: 12px
+- XL: 16px
+
+### シャドウ
+システム: ${themeSettings.layout.shadows}
+- Small: shadow-sm
+- Default: shadow
+- Medium: shadow-md
+- Large: shadow-lg
+- XL: shadow-xl
+
+### コンテナ幅
+最大幅: ${themeSettings.layout.containerWidth}
+
+### レスポンシブブレークポイント
+- Mobile: < 768px (スマートフォン向け)
+- Tablet: 768px - 1024px (タブレット向け)
+- Desktop: 1024px - 1280px (デスクトップ向け)
+- Large: > 1280px (大画面向け)
+
+## アニメーション仕様
+
+### 基本設定
+- アニメーション時間: ${themeSettings.animations.duration}ms
+- イージング: ${themeSettings.animations.easing}
+- ホバーエフェクト: ${themeSettings.animations.hoverEffects ? '有効' : '無効'}
+- モーション軽減: ${themeSettings.animations.reducedMotion ? '有効' : '無効'}
+
+### アニメーションタイプ
+- Fade In: 透明度の変化 (opacity-0 → opacity-100)
+- Slide Up: 下から上へのスライド (translateY(20px) → translateY(0))
+- Scale Up: サイズの拡大 (scale(0.95) → scale(1))
+- Slide Left/Right: 左右からのスライド (translateX(±20px) → translateX(0))
+
+## コード出力
+
+### CSS変数
+${generateCSSVariables()}
+
+### Tailwind CSS設定
+${generateTailwindConfig()}
+
+---
+生成日: ${new Date().toLocaleString('ja-JP')}
+`;
+  };
+
   const sections = [
     { id: 'overview', label: '概要', icon: <Eye className="w-4 h-4" /> },
     { id: 'colors', label: 'カラーパレット', icon: <Palette className="w-4 h-4" /> },
@@ -691,6 +831,17 @@ ${cssVars}
               >
                 メインサイトに戻る
               </a>
+              <button
+                onClick={() => copyToClipboard(generateFullText(), 'fulltext')}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
+                  copiedCode === 'fulltext'
+                    ? 'bg-green-600 text-white'
+                    : 'bg-purple-600 hover:bg-purple-700 text-white'
+                }`}
+              >
+                {copiedCode === 'fulltext' ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                <span>{copiedCode === 'fulltext' ? 'コピー済み' : '全文コピー'}</span>
+              </button>
               <button
                 onClick={() => window.print()}
                 className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"

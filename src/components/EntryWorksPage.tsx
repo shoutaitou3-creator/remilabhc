@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Camera, ExternalLink } from 'lucide-react';
+import { Camera, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
 import { useSiteMetadata } from '../hooks/useSiteMetadata';
 import AnimatedSection from './AnimatedSection';
 import EntryWorkCard from './entryWorks/EntryWorkCard';
@@ -11,6 +11,7 @@ const EntryWorksPage = () => {
   const [displayedWorksCount, setDisplayedWorksCount] = useState(12);
   const [showModal, setShowModal] = useState(false);
   const [selectedWork, setSelectedWork] = useState<any | null>(null);
+  const [statsOpen, setStatsOpen] = useState(false);
   const { settings: siteSettings } = useSiteMetadata();
 
   const { entryWorks, loading, error, fetchPublishedEntryWorks } = useEntryWorksData();
@@ -100,9 +101,60 @@ const EntryWorksPage = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* 統計情報 */}
+        {/* 統計情報 - デスクトップは常に表示、モバイルはアコーディオン */}
         <AnimatedSection animationType="fadeIn" className="mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* モバイル用アコーディオン */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setStatsOpen(!statsOpen)}
+              className="w-full bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex items-center justify-between"
+            >
+              <div className="flex items-center space-x-3">
+                <Camera className="w-6 h-6 text-blue-500" />
+                <span className="font-medium text-gray-900">統計情報</span>
+              </div>
+              {statsOpen ? (
+                <ChevronUp className="w-5 h-5 text-gray-400" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-gray-400" />
+              )}
+            </button>
+
+            {statsOpen && (
+              <div className="mt-4 grid grid-cols-1 gap-4">
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-600 mb-1">総作品数</p>
+                      <p className="text-3xl font-bold text-gray-900">{totalWorks}</p>
+                    </div>
+                    <Camera className="w-12 h-12 text-blue-500" />
+                  </div>
+                </div>
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-600 mb-1">クリエイティブ部門</p>
+                      <p className="text-3xl font-bold text-blue-600">{creativeWorks}</p>
+                    </div>
+                    <Camera className="w-12 h-12 text-blue-500" />
+                  </div>
+                </div>
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-600 mb-1">リアリティー部門</p>
+                      <p className="text-3xl font-bold text-orange-600">{realityWorks}</p>
+                    </div>
+                    <Camera className="w-12 h-12 text-orange-500" />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* デスクトップ用常時表示 */}
+          <div className="hidden md:grid grid-cols-3 gap-6">
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
               <div className="flex items-center justify-between">
                 <div>
